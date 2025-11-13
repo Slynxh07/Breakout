@@ -8,7 +8,8 @@ public:
 
 private:
     int rad;
-    int speed;
+    float xSpeed;
+    float ySpeed;
     Vector2 pos;
     void move();
 };
