@@ -8,6 +8,7 @@ public:
   Platform();
   void draw();
   void update();
+  Rectangle getRect();
 
 private:
   float width;

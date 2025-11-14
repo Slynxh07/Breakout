@@ -1,16 +1,21 @@
 #include "platform.h"
 
 Platform::Platform() {
-  this->width = 100.0f;
-  this->height = 20.0f;
-  this->pos = {(float) (GetScreenWidth() - width) / 2, 600};
+  this->width = 125.0f;
+  this->height = 15.0f;
+  this->pos = {(float) (GetScreenWidth() - width) / 2, (float) (GetScreenHeight() - 20)};
   this->speed = 5;
   this->rect = {pos.x, pos.y, width, height};
 }
 
 void Platform::draw() 
 { 
-  DrawRectangleRounded(rect, 2, 1, RED); 
+  DrawRectangleRounded(rect, 2, 50, WHITE);
+}
+
+Rectangle Platform::getRect()
+{
+  return rect;
 }
 
 void Platform::update() { move(); }

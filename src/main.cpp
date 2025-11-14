@@ -1,8 +1,9 @@
 #include "game.h"
 #include "raylib.h"
+#include <iostream>
 
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 600
+#define HEIGHT 600
 
 int main() {
   InitWindow(WIDTH, HEIGHT, "Breakout");

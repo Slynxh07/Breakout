@@ -16,4 +16,5 @@ void Game::update() {
   draw();
   platform.update();
   ball.update();
+  ball.checkCollision(platform.getRect());
 }
