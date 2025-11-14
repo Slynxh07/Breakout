@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(raylibIntro)
+project(breakout)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -24,11 +24,11 @@ endif()
 
 file(GLOB SRC_FILES "${SRC_DIR}/*.cpp")
 
-add_executable(raylibIntro ${SRC_FILES})
+add_executable(breakout ${SRC_FILES})
 
-target_include_directories(raylibIntro PRIVATE ${INCLUDE_DIR})
+target_include_directories(breakout PRIVATE ${INCLUDE_DIR})
 
-target_link_libraries(raylibIntro raylib)
+target_link_libraries(breakout raylib)
 
 if (MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
