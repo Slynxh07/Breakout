@@ -2,8 +2,8 @@
 #include "raylib.h"
 #include <iostream>
 
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 602
+#define HEIGHT 602
 
 int main() {
   InitWindow(WIDTH, HEIGHT, "Breakout");

@@ -20,6 +20,7 @@ cmake --build .
 Breakout/
 ├── include/          # Header files (.h)
 ├── src/              # Source files (.cpp)
+├── build/            # Build files
 ├── CMakeLists.txt    # CMake build config
 ├── .gitignore
 └── README.md
