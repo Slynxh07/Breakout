@@ -33,8 +33,8 @@ bool Ball::checkCollisionBlock(Rectangle rect)
     Vector2 prevPos = { pos.x - velocity.x, pos.y - velocity.y };
     if (CheckCollisionCircleRec(pos, rad, rect))
     {
-        bool fromLeft   = prevPos.x + rad <= rect.x;
-        bool fromRight  = prevPos.x - rad >= rect.x + rect.width;
+        bool fromLeft = prevPos.x + rad <= rect.x;
+        bool fromRight = prevPos.x - rad >= rect.x + rect.width;
         
         if (fromLeft || fromRight) velocity.x *= -1;
         else velocity.y *= -1;

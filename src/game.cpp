@@ -1,5 +1,4 @@
 #include "game.h"
-#include <iostream>
 
 Game::Game() 
 {
@@ -66,7 +65,11 @@ void Game::update() {
     {
       if (blocks[row][col].active)
       {
-        if (ball.checkCollisionBlock(blocks[row][col].getRect())) blocks[row][col].active = false;
+        if (ball.checkCollisionBlock(blocks[row][col].getRect())) 
+        {
+          blocks[row][col].active = false;
+          break;
+        }  
       }
     }
   }
