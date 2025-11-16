@@ -8,6 +8,7 @@ public:
     void draw();
     void checkCollisionPlatform(Rectangle rect);
     bool checkCollisionBlock(Rectangle rect);
+    bool outOfBounds();
 
 private:
     int rad;

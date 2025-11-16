@@ -58,3 +58,9 @@ void Ball::move()
         velocity.y *= -1;
     }
 }
+
+bool Ball::outOfBounds()
+{
+    if (pos.y > GetScreenHeight() + rad) return true;
+    return false;
+}

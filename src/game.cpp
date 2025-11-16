@@ -4,6 +4,7 @@ Game::Game()
 {
   rows = 4;
   cols = 7;
+  running = true;
   init();
 }
 
@@ -37,10 +38,8 @@ void Game::init()
   }
 }
 
-void Game::draw() {
-  BeginDrawing();
-
-  ClearBackground(BLACK);
+void Game::draw() 
+{
   platform.draw();
   ball.draw();
   for (int row = 0; row < rows; row++)
@@ -50,27 +49,60 @@ void Game::draw() {
       if (blocks[row][col].active) blocks[row][col].draw();
     }
   }
+}
 
+void Game::update() 
+{
+
+  BeginDrawing();
+  ClearBackground(BLACK);
+
+  if (running)
+  {
+    draw();
+    platform.update();
+    ball.update();
+    ball.checkCollisionPlatform(platform.getRect());
+    for (int row = 0; row < rows; row++)
+    {
+      for (int col = 0; col < cols; col++)
+      {
+        if (blocks[row][col].active)
+        {
+          if (ball.checkCollisionBlock(blocks[row][col].getRect())) 
+          {
+            blocks[row][col].active = false;
+            break;
+          }  
+        }
+      }
+    }
+    if (winCheck())
+    {
+      gameOverMessage = "YOU WIN!";
+      running = false;
+    }
+    else if (ball.outOfBounds())
+    {
+      gameOverMessage = "YOU LOSE!";
+      running = false;
+    }
+  }
+  else
+  {
+    DrawText(gameOverMessage.c_str(), 250, GetScreenHeight() / 2, 25, WHITE);
+  }
   EndDrawing();
 }
 
-void Game::update() {
-  draw();
-  platform.update();
-  ball.update();
-  ball.checkCollisionPlatform(platform.getRect());
+bool Game::winCheck()
+{
   for (int row = 0; row < rows; row++)
   {
     for (int col = 0; col < cols; col++)
     {
-      if (blocks[row][col].active)
-      {
-        if (ball.checkCollisionBlock(blocks[row][col].getRect())) 
-        {
-          blocks[row][col].active = false;
-          break;
-        }  
-      }
+      if (blocks[row][col].active) return false;
     }
   }
+  return true;
 }
