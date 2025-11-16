@@ -17,7 +17,7 @@ void Ball::update()
     move();
 }
 
-void Ball::checkCollision(Rectangle rect)
+void Ball::checkCollisionPlatform(Rectangle rect)
 {
     if (CheckCollisionCircleRec(pos, rad, rect))
     {
@@ -26,6 +26,21 @@ void Ball::checkCollision(Rectangle rect)
         velocity.x = (hitPos - 0.5f) * 8.0f;
         velocity.y *= -1;
     }
+}
+
+bool Ball::checkCollisionBlock(Rectangle rect)
+{
+    Vector2 prevPos = { pos.x - velocity.x, pos.y - velocity.y };
+    if (CheckCollisionCircleRec(pos, rad, rect))
+    {
+        bool fromLeft   = prevPos.x + rad <= rect.x;
+        bool fromRight  = prevPos.x - rad >= rect.x + rect.width;
+        
+        if (fromLeft || fromRight) velocity.x *= -1;
+        else velocity.y *= -1;
+        return true;
+    }
+    return false;
 }
 
 void Ball::move()

@@ -7,6 +7,7 @@ Block::Block()
     this->width = 86.0f;
     this->height = 30.0f;
     this->rect = {pos.x, pos.y, width, height};
+    this->active = true;
 }
 
 Block::Block(float posX, float posY, Color color)
@@ -16,6 +17,7 @@ Block::Block(float posX, float posY, Color color)
     this->width = 86.0f;
     this->height = 30.0f;
     this->rect = {pos.x, pos.y, width, height};
+    this->active = true;
 }
 
 Rectangle Block::getRect()

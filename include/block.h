@@ -6,6 +6,7 @@ public:
     Block(float posX, float posY, Color color);
     Rectangle getRect();
     void draw();
+    bool active;
 
 private:
     Vector2 pos;

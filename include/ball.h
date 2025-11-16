@@ -1,11 +1,13 @@
 #include "raylib.h"
+#include "cmath"
 
 class Ball {
 public:
     Ball();
     void update();
     void draw();
-    void checkCollision(Rectangle rect);
+    void checkCollisionPlatform(Rectangle rect);
+    bool checkCollisionBlock(Rectangle rect);
 
 private:
     int rad;

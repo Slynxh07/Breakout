@@ -1,4 +1,5 @@
 #include "game.h"
+#include <iostream>
 
 Game::Game() 
 {
@@ -47,7 +48,7 @@ void Game::draw() {
   {
     for (int col = 0; col < cols; col++)
     {
-      blocks[row][col].draw();
+      if (blocks[row][col].active) blocks[row][col].draw();
     }
   }
 
@@ -58,12 +59,15 @@ void Game::update() {
   draw();
   platform.update();
   ball.update();
-  ball.checkCollision(platform.getRect());
+  ball.checkCollisionPlatform(platform.getRect());
   for (int row = 0; row < rows; row++)
   {
     for (int col = 0; col < cols; col++)
     {
-      ball.checkCollision(blocks[row][col].getRect());
+      if (blocks[row][col].active)
+      {
+        if (ball.checkCollisionBlock(blocks[row][col].getRect())) blocks[row][col].active = false;
+      }
     }
   }
 }
