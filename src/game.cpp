@@ -63,20 +63,7 @@ void Game::update()
     platform.update();
     ball.update();
     ball.checkCollisionPlatform(platform.getRect());
-    for (int row = 0; row < rows; row++)
-    {
-      for (int col = 0; col < cols; col++)
-      {
-        if (blocks[row][col].active)
-        {
-          if (ball.checkCollisionBlock(blocks[row][col].getRect())) 
-          {
-            blocks[row][col].active = false;
-            break;
-          }  
-        }
-      }
-    }
+    checkBrickCollision();
     if (winCheck())
     {
       gameOverMessage = "YOU WIN!";
@@ -105,4 +92,37 @@ bool Game::winCheck()
     }
   }
   return true;
+}
+
+void Game::checkBrickCollision()
+{
+  brickHit bestHit = { false, 0, 0 };
+  for (int row = 0; row < rows; row++)
+  {
+    for (int col = 0; col < cols; col++)
+    {
+      brickHit currHit = ball.checkCollisionBlock(blocks[row][col].getRect());
+      if (blocks[row][col].active && currHit.hit)
+      {
+        blocks[row][col].active = false;
+        if (!bestHit.hit || currHit.overlapX + currHit.overlapY > bestHit.overlapX + bestHit.overlapY)
+        {
+          bestHit.hit = true;
+          bestHit.overlapX = currHit.overlapX;
+          bestHit.overlapY = currHit.overlapY;
+        }
+      }
+    }
+  }
+
+  if (bestHit.hit)
+  {
+    if (fabs(bestHit.overlapX) > fabs(bestHit.overlapY)) ball.changeXDir();
+    else if (fabs(bestHit.overlapX) < fabs(bestHit.overlapY)) ball.changeYDir();
+    else
+    {
+      ball.changeXDir();
+      ball.changeYDir();
+    }
+  }
 }

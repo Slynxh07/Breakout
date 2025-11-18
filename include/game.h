@@ -4,6 +4,7 @@
 #include "platform.h"
 #include "ball.h"
 #include "block.h"
+#include "brickHit.h"
 #include <string>
 
 class Game {
@@ -15,6 +16,7 @@ private:
   void draw();
   void init();
   bool winCheck();
+  void checkBrickCollision();
   Platform platform;
   Ball ball;
   int rows;

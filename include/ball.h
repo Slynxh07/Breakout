@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "cmath"
+#include "brickHit.h"
 
 class Ball {
 public:
@@ -7,8 +8,10 @@ public:
     void update();
     void draw();
     void checkCollisionPlatform(Rectangle rect);
-    bool checkCollisionBlock(Rectangle rect);
+    brickHit checkCollisionBlock(Rectangle rect);
     bool outOfBounds();
+    void changeXDir();
+    void changeYDir();
 
 private:
     int rad;
