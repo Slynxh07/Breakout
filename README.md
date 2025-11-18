@@ -1,6 +1,8 @@
 # Breakout
 Breakout recreation using C++ and the Raylib library
 
+![alt text](images/image.png)
+
 # Build Instructions
 ```bash
 # Clone the repository
