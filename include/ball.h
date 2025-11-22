@@ -1,5 +1,6 @@
 #include "raylib.h"
-#include "cmath"
+#include <cmath>
+#include "raymath.h"
 #include "brickHit.h"
 
 class Ball {
@@ -10,6 +11,7 @@ public:
     void checkCollisionPlatform(Rectangle rect);
     brickHit checkCollisionBlock(Rectangle rect);
     bool outOfBounds();
+    bool isActive();
     void changeXDir();
     void changeYDir();
 
@@ -20,4 +22,5 @@ private:
     Vector2 velocity;
     Vector2 pos;
     void move();
+    bool active;
 };

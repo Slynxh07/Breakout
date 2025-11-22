@@ -38,6 +38,14 @@ void Game::init()
   }
 }
 
+void Game::restartGame()
+{
+  ball = Ball();
+  platform = Platform();
+  init();
+  running = true;
+}
+
 void Game::draw() 
 {
   platform.draw();
@@ -78,6 +86,8 @@ void Game::update()
   else
   {
     DrawText(gameOverMessage.c_str(), 250, GetScreenHeight() / 2, 25, WHITE);
+    DrawText("Press Escape to quit or Enter to play again", 25, (GetScreenHeight() / 2) + 50, 25, WHITE);
+    if (IsKeyPressed(KEY_ENTER)) restartGame();
   }
   EndDrawing();
 }

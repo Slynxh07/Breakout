@@ -5,6 +5,12 @@ Ball::Ball()
     this->rad = 10;
     this->velocity = { 4, 4 };
     this->pos = {(float) (GetScreenWidth() / 2), (float) (GetScreenHeight() - 35)};
+    this->active = false;
+}
+
+bool Ball::isActive()
+{
+    return active;
 }
 
 void Ball::draw()
@@ -13,8 +19,14 @@ void Ball::draw()
 }
 
 void Ball::update()
-{
-    move();
+{   if (IsKeyPressed(KEY_UP)) active = true;
+    if (active) move();
+    else
+    {
+        if (IsKeyDown(KEY_LEFT)) pos.x -= 5;
+        if (IsKeyDown(KEY_RIGHT)) pos.x += 5;
+        pos.x = Clamp(pos.x, 62.5f, GetScreenWidth() - 62.5f);
+    }
 }
 
 void Ball::changeXDir()
@@ -29,12 +41,24 @@ void Ball::changeYDir()
 
 void Ball::checkCollisionPlatform(Rectangle rect)
 {
+    Vector2 prevPos = { pos.x - velocity.x, pos.y - velocity.y };
+    
     if (CheckCollisionCircleRec(pos, rad, rect))
     {
-        float hitPos = (pos.x - rect.x) / rect.width;
+        bool fromLeft = prevPos.x + rad <= rect.x;
+        bool fromRight = prevPos.x - rad >= rect.x + rect.width;
+        
+        if (fromLeft || fromRight) 
+        {
+            return;   
+        }
+        else
+        {
+            float hitPos = (pos.x - rect.x) / rect.width;
 
-        velocity.x = (hitPos - 0.5f) * 8.0f;
-        velocity.y *= -1;
+            velocity.x = (hitPos - 0.5f) * 8.0f;
+            velocity.y *= -1;
+        }
     }
 }
 
@@ -51,17 +75,7 @@ brickHit Ball::checkCollisionBlock(Rectangle rect)
 
         currHit.overlapX = fabs(prevPos.x - nearestX);
         currHit.overlapY = fabs(prevPos.y - nearestY);
-
-        /*
-        bool fromLeft = prevPos.x + rad <= rect.x;
-        bool fromRight = prevPos.x - rad >= rect.x + rect.width;
-        
-        if (fromLeft || fromRight) velocity.x *= -1;
-        else velocity.y *= -1;
-        return true;
-        */
     }
-    //return false;
     return currHit;
 }
 

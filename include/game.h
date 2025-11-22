@@ -15,6 +15,7 @@ public:
 private:
   void draw();
   void init();
+  void restartGame();
   bool winCheck();
   void checkBrickCollision();
   Platform platform;
